@@ -1,0 +1,767 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:background="@null">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SkinDoc"
+            android:fontFamily="@font/poppinsbold"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp" />
+
+        <ImageButton
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/user" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:elevation="10dp"
+        app:dividerColor="@color/black"
+        />
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_below="@id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Search Bar -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_search" />
+
+                    <EditText
+                        android:id="@+id/et_search_box"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Search doctor, drugs, articles..."
+                        android:fontFamily="@font/popinslight"
+                        android:background="@null"
+                        android:textColor="@color/search"
+                        android:textSize="14sp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Categories -->
+            <LinearLayout
+                android:id="@+id/categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/doctor_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:background="@null"
+                        android:src="@drawable/doctor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Doctor"
+                        android:fontFamily="@font/popinslight"
+                        android:textSize="12sp"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/medicine" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pharmacy"
+                        android:fontFamily="@font/popinslight"
+                        android:textSize="12sp"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/hospital" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hospital"
+                        android:fontFamily="@font/popinslight"
+                        android:textSize="12sp"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/emergency_services" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ambulance"
+                        android:fontFamily="@font/popinslight"
+                        android:textSize="12sp"
+                        android:gravity="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/top_doctors_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="Top Doctors"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/doctor_see_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See More"
+                    android:layout_marginTop="20dp"
+                    android:textSize="11dp"
+                    android:background="@null"
+                    android:fontFamily="@font/poppinsmedium" />
+            </LinearLayout>
+
+
+
+            <!-- Doctor Cards -->
+            <LinearLayout
+                android:id="@+id/doc_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="130dp"
+                    app:cardCornerRadius="20dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/doc_name_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dr. Smith"
+                            android:fontFamily="@font/poppinsbold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/contact_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/doc_name_1"
+                            android:text="Cardiologist"
+                            android:fontFamily="@font/poppinsmedium"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="130dp"
+                    app:cardCornerRadius="20dp"
+
+                    android:layout_weight="1"
+                    android:layout_margin="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/doc_name_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dr. Jane"
+                            android:fontFamily="@font/poppinsbold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/contact_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/doc_name_2"
+                            android:text="Dermatologist"
+                            android:fontFamily="@font/poppinsmedium"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/doc_list_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="130dp"
+                    app:cardCornerRadius="20dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/doc_name_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dr. Smith"
+                            android:fontFamily="@font/poppinsbold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/contact_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/doc_name_3"
+                            android:text="Cardiologist"
+                            android:fontFamily="@font/poppinsmedium"
+                            android:textSize="14sp" />
+
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="130dp"
+                    app:cardCornerRadius="20dp"
+
+                    android:layout_weight="1"
+                    android:layout_margin="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/doc_name_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dr. Jane"
+                            android:fontFamily="@font/poppinsbold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/contact_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/doc_name_4"
+                            android:text="Dermatologist"
+                            android:fontFamily="@font/poppinsmedium"
+                            android:textSize="14sp" />
+
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/top_article_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="Top Article"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/article_see_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See More"
+                    android:layout_marginTop="20dp"
+                    android:textSize="11sp"
+                    android:background="@null"
+                    android:fontFamily="@font/poppinsmedium" />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:id="@+id/top_article_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="130dp"
+                    app:cardCornerRadius="20dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/article_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dr. Smith"
+                            android:fontFamily="@font/poppinsbold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/article_1_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/article_1"
+                            android:text="Cardiologist"
+                            android:fontFamily="@font/poppinsmedium"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="130dp"
+                    app:cardCornerRadius="20dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/article_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dr. Jane"
+                            android:fontFamily="@font/poppinsbold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/article_2_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/article_2"
+                            android:text="Dermatologist"
+                            android:fontFamily="@font/poppinsmedium"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/top_article_layout_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="130dp"
+                    app:cardCornerRadius="20dp"
+                    android:layout_weight="1"
+
+                    android:layout_margin="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/article_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dr. Smith"
+                            android:fontFamily="@font/poppinsbold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/article_3_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/article_3"
+                            android:text="Cardiologist"
+                            android:fontFamily="@font/poppinsmedium"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="130dp"
+                    app:cardCornerRadius="20dp"
+
+                    android:layout_weight="1"
+                    android:layout_margin="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/article_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dr. Jane"
+                            android:fontFamily="@font/poppinsbold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/article_4_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/article_4"
+                            android:text="Dermatologist"
+                            android:fontFamily="@font/poppinsmedium"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"/>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/floating_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="6dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_nav_bar"
+        android:elevation="8dp"
+        android:padding="8dp"
+        app:layout_anchorGravity="bottom">
+
+        <LinearLayout
+            android:id="@+id/navbar_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <!-- Article -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingVertical="4dp">
+
+                    <ImageButton
+                        android:id="@+id/nav_article"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:src="@drawable/article" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Article"
+                        android:fontFamily="@font/popinslight"
+                        android:textSize="12sp"
+                        android:gravity="center" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Home -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingVertical="4dp">
+
+                    <ImageButton
+                        android:id="@+id/nav_home"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:src="@drawable/home" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Home"
+                        android:fontFamily="@font/popinslight"
+                        android:textSize="12sp"
+                        android:gravity="center" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Scanner -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="0dp"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:orientation="vertical"
+                    android:paddingVertical="4dp">
+
+                    <ImageButton
+                        android:id="@+id/nav_scanner"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:paddingTop="1dp"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:src="@drawable/scanner" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Scanner"
+                        android:fontFamily="@font/popinslight"
+                        android:textSize="12sp"
+                        android:gravity="center" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Schedule -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:orientation="vertical"
+                    android:paddingVertical="4dp">
+
+                    <ImageButton
+                        android:id="@+id/nav_schedule"
+                        android:layout_width="36dp"
+                        android:paddingTop="1dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:src="@drawable/schedule" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Events"
+                        android:fontFamily="@font/popinslight"
+                        android:textSize="12sp"
+                        android:gravity="center" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Assist -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:orientation="vertical"
+                    android:paddingVertical="4dp">
+
+                    <ImageButton
+                        android:id="@+id/nav_bot"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:src="@drawable/chat_bot" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Assist"
+                        android:fontFamily="@font/popinslight"
+                        android:textSize="12sp"
+                        android:gravity="center" />
+                </LinearLayout>
+            </FrameLayout>
+
+        </LinearLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+
+
+</RelativeLayout>

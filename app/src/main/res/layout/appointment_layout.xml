@@ -1,0 +1,392 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@null">
+
+        <ImageButton
+            android:id="@+id/toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/toolbar_back"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="start"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doctor Details"
+            android:fontFamily="@font/poppinsbold"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_gravity="center" />
+
+        <ImageButton
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/user"
+            android:background="@null" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:dividerColor="@color/black" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_above="@id/bookinglayout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <!-- Content Layout -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/doctorCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        android:backgroundTint="@color/white">
+
+        <LinearLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/calendar_border"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Doctor Image -->
+            <ImageView
+                android:id="@+id/doctorImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/lakshay"
+                android:background="@drawable/circle_background"
+                android:layout_marginEnd="16dp" />
+
+            <!-- Details Section -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- Doctor Name -->
+                <TextView
+                    android:id="@+id/doctorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr. Marcus Horizon"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- Doctor Specialty -->
+                <TextView
+                    android:id="@+id/doctorSpecialty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dermatologist"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:layout_marginTop="4dp" />
+
+                <!-- Doctor City -->
+                <TextView
+                    android:id="@+id/doctorCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bangalore"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:layout_marginTop="4dp" />
+
+                <!-- Rating and Distance -->
+                <LinearLayout
+                    android:id="@+id/ratingDistanceLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/star"
+                        android:contentDescription="Rating Icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4.7"
+                        android:fontFamily="@font/poppinsregular"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:layout_marginStart="4dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="• 800m away"
+                        android:fontFamily="@font/poppinsregular"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+    <!-- About Section -->
+    <TextView
+        android:id="@+id/aboutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppinsbold"
+        android:textColor="@color/black"
+        android:layout_below="@+id/doctorCard"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/aboutText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dr. [Doctor's Name] is a highly skilled and compassionate dermatologist with [X years] of experience in treating a wide spectrum of skin, hair, and nail conditions. Known for their patient-first approach, Dr. [Name] stays at the forefront of dermatological advancements, ensuring the best care for every individual. With expertise in [specific specialties, e.g., acne treatment, anti-aging solutions, or skin cancer management], they are dedicated to helping patients achieve healthy, radiant skin. Dr. [Name] believes in empowering patients with knowledge and personalized treatment plans tailored to their unique needs."
+        android:fontFamily="@font/poppinsregular"
+        android:textSize="15sp"
+        android:ellipsize="end"
+        android:textColor="@color/black"
+        android:layout_below="@id/aboutTitle"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/cale_text"
+        android:layout_below="@+id/aboutText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Select date of appointment"
+        android:textSize="18dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="17dp"
+        android:textColor="@color/black"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/calendarRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:alignmentMode="alignMargins"
+        android:padding="8dp" />
+
+
+
+        <GridLayout
+            android:id="@+id/timeSlotGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calendarRecyclerView"
+            android:columnCount="3"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/time_9_am"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:gravity="center"
+                android:text="09:00 AM"
+                android:fontFamily="@font/poppinsmedium"
+                android:textColor="@color/black"
+                android:background="@drawable/calendar_border"
+                android:padding="8dp"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/time_10_am"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:gravity="center"
+                android:fontFamily="@font/poppinsmedium"
+                android:text="10:00 AM"
+                android:textColor="@color/black"
+                android:background="@drawable/calendar_border"
+                android:padding="8dp"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/time_11_am"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:gravity="center"
+                android:fontFamily="@font/poppinsmedium"
+                android:text="11:00 AM"
+                android:textColor="@color/black"
+                android:background="@drawable/calendar_border"
+                android:padding="8dp"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/time_1_pm"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:gravity="center"
+                android:fontFamily="@font/poppinsmedium"
+                android:text="01:00 PM"
+                android:textColor="@color/black"
+                android:background="@drawable/calendar_border"
+                android:padding="8dp"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/time_2_pm"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:gravity="center"
+                android:fontFamily="@font/poppinsmedium"
+                android:text="02:00 PM"
+                android:textColor="@color/black"
+                android:background="@drawable/calendar_border"
+                android:padding="8dp"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/time_3_pm"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:fontFamily="@font/poppinsmedium"
+                android:gravity="center"
+                android:text="03:00 PM"
+                android:textColor="@color/black"
+                android:background="@drawable/calendar_border"
+                android:padding="8dp"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/time_4_pm"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:fontFamily="@font/poppinsmedium"
+                android:gravity="center"
+                android:text="04:00 PM"
+                android:textColor="@color/black"
+                android:background="@drawable/calendar_border"
+                android:padding="8dp"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/time_7_pm"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:gravity="center"
+                android:fontFamily="@font/poppinsmedium"
+                android:text="07:00 PM"
+                android:textColor="@color/black"
+                android:background="@drawable/calendar_border"
+                android:padding="8dp"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/time_8_pm"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:gravity="center"
+                android:fontFamily="@font/poppinsmedium"
+                android:text="08:00 PM"
+                android:textColor="@color/black"
+                android:background="@drawable/calendar_border"
+                android:padding="8dp"
+                android:layout_margin="8dp" />
+        </GridLayout>
+    </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/bookinglayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp">
+
+        <!-- Chat Bot Button -->
+        <ImageButton
+            android:id="@+id/chat_bot"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/chat_bot"
+            android:background="@null"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Book Appointment Button -->
+        <Button
+            android:id="@+id/bookAppointmentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Book Appointment"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"
+            android:fontFamily="@font/poppinsmedium"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/LoginBtn"
+            android:layout_margin="8dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,55 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Doctor Name -->
+        <TextView
+            android:id="@+id/tv_doctor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dr. Jane Doe"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Clinic Name -->
+        <TextView
+            android:id="@+id/tv_clinic_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cosderma Clinic"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Address -->
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#422, 1st Floor, Vibhu Complex, Bangalore"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Contact -->
+        <TextView
+            android:id="@+id/tv_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="080 4210 6262"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

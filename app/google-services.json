@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "172169537125",
+    "project_id": "skindoc-d9e4e",
+    "storage_bucket": "skindoc-d9e4e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172169537125:android:5b31bcc87dfe08ef4ac88c",
+        "android_client_info": {
+          "package_name": "com.hfad.skindoc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172169537125-606vh9nlhb5l7veecvrvo7bs1t9up63n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hfad.skindoc",
+            "certificate_hash": "339d4d74dc2b215d5ca748559d92f34216070ccd"
+          }
+        },
+        {
+          "client_id": "172169537125-g2lm37mn73k1tqd1pl37j1eebhvh7bjh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArgYBi_m79bIdelzX-o8xhChvBt4ghTx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172169537125-g2lm37mn73k1tqd1pl37j1eebhvh7bjh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
