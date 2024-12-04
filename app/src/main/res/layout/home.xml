@@ -134,6 +134,7 @@
                     android:gravity="center">
 
                     <ImageButton
+                        android:id="@+id/pharmacy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"

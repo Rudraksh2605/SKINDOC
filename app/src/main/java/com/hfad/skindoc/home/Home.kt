@@ -104,7 +104,7 @@ class Home : AppCompatActivity() {
         docName3: TextView, contact3: TextView,
         docName4: TextView, contact4: TextView
     ) {
-        val docRef = db.collection("Acne").document("Bangalore")
+        val docRef = db.collection("Atopic Dermatitis").document("Bangalore")
 
         docRef.get()
             .addOnSuccessListener { document ->
@@ -154,6 +154,8 @@ class Home : AppCompatActivity() {
         intent.putExtra("doctor_name", doctorName)
         startActivity(intent)
     }
+
+
 
     companion object {
         const val CAMERA_REQUEST_CODE = 101

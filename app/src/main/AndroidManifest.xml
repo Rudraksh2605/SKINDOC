@@ -43,6 +43,12 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
 
+        <activity
+            android:name=".pharmacy.pharmacy"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+
 
         <activity
             android:name=".home.Home"

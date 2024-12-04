@@ -102,7 +102,7 @@ class DoctorListActivity : AppCompatActivity() {
     }
 
     private fun fetchDoctors() {
-        db.collection("Acne").document(selectedCity)
+        db.collection("Atopic Dermatitis").document(selectedCity)
             .get()
             .addOnSuccessListener { document ->
                 if (document != null) {
