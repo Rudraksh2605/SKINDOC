@@ -16,6 +16,7 @@ import com.hfad.skindoc.chatbot.ChatBotActivity
 import com.hfad.skindoc.event.EventsActivity
 import com.hfad.skindoc.R
 import com.hfad.skindoc.appointment.DoctorDetailAppointmentActivity
+import com.hfad.skindoc.pharmacy.pharmacy
 import com.hfad.skindoc.userprofile.UserProfileActivity
 
 class Home : AppCompatActivity() {
@@ -38,6 +39,7 @@ class Home : AppCompatActivity() {
         val btn_see_more_doc = findViewById<Button>(R.id.doctor_see_more)
         val btn_see_more_article = findViewById<Button>(R.id.article_see_more)
         val btn_doctor = findViewById<ImageButton>(R.id.doctor_image)
+        val btn_pahrmacy = findViewById<ImageButton>(R.id.pharmacy)
 
         val doc_name_1 = findViewById<TextView>(R.id.doc_name_1)
         val contact_1 = findViewById<TextView>(R.id.contact_1)
@@ -55,6 +57,11 @@ class Home : AppCompatActivity() {
 
         btn_user.setOnClickListener {
             val intent = Intent(this, UserProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_pahrmacy.setOnClickListener {
+            val intent = Intent(this, pharmacy::class.java)
             startActivity(intent)
         }
 

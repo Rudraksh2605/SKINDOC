@@ -1,5 +1,6 @@
 package com.hfad.skindoc.pharmacy
 
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
