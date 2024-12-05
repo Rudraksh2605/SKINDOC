@@ -31,6 +31,9 @@ class Home : AppCompatActivity() {
 
         db = FirebaseFirestore.getInstance()
 
+        fetchHospitalDetails()
+
+
         val btn_user = findViewById<ImageButton>(R.id.user)
         val et_search_text = findViewById<EditText>(R.id.et_search_box)
         val btn_article = findViewById<ImageButton>(R.id.nav_article)
@@ -39,11 +42,12 @@ class Home : AppCompatActivity() {
         val btn_event = findViewById<ImageButton>(R.id.nav_schedule)
         val btn_chat_bot = findViewById<ImageButton>(R.id.nav_bot)
         val btn_see_more_doc = findViewById<Button>(R.id.doctor_see_more)
-        val btn_see_more_article = findViewById<Button>(R.id.article_see_more)
+        val btn_see_more_hospital = findViewById<Button>(R.id.hospital_see_more)
         val btn_doctor = findViewById<ImageButton>(R.id.doctor_image)
         val btn_pahrmacy = findViewById<ImageButton>(R.id.pharmacy)
         val btn_ambulance = findViewById<ImageButton>(R.id.ambulance)
         val btn_hospital = findViewById<ImageButton>(R.id.hospital)
+
 
         val doc_name_1 = findViewById<TextView>(R.id.doc_name_1)
         val contact_1 = findViewById<TextView>(R.id.contact_1)
@@ -58,6 +62,11 @@ class Home : AppCompatActivity() {
         val contact_4 = findViewById<TextView>(R.id.contact_4)
 
         fetchDoctorDetails(doc_name_1, contact_1, doc_name_2, contact_2, doc_name_3, contact_3, doc_name_4, contact_4)
+
+        btn_see_more_hospital.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
+            startActivity(intent)
+        }
 
         btn_user.setOnClickListener {
             val intent = Intent(this, UserProfileActivity::class.java)
@@ -103,8 +112,8 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btn_see_more_article.setOnClickListener {
-            val intent = Intent(this, ArticlesListActivity::class.java)
+        btn_see_more_hospital.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
             startActivity(intent)
         }
 
@@ -177,6 +186,49 @@ class Home : AppCompatActivity() {
         intent.putExtra("doctor_name", doctorName)
         startActivity(intent)
     }
+
+    private fun fetchHospitalDetails() {
+        val hospitalRef = db.collection("HOSPITAL").document("Bangalore")
+
+        hospitalRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val hospitals = document.get("hospitals") as? List<Map<String, String>>
+
+                    if (hospitals != null && hospitals.size >= 4) {
+                        val hospital1 = hospitals[0]
+                        val hospital2 = hospitals[1]
+                        val hospital3 = hospitals[2]
+                        val hospital4 = hospitals[3]
+
+
+                        findViewById<TextView>(R.id.hospital_1).text = hospital1["name"]
+                        findViewById<TextView>(R.id.hospital_1_content).text = hospital1["contact"]
+
+
+                        findViewById<TextView>(R.id.hospital_2).text = hospital2["name"]
+                        findViewById<TextView>(R.id.hospital_2_content).text = hospital2["contact"]
+
+
+                        findViewById<TextView>(R.id.hospital_3).text = hospital3["name"]
+                        findViewById<TextView>(R.id.hospital_3_content).text = hospital3["contact"]
+
+
+                        findViewById<TextView>(R.id.hospital_4).text = hospital4["name"]
+                        findViewById<TextView>(R.id.hospital_4_content).text = hospital4["contact"]
+                    } else {
+                        Log.d("HospitalDetails", "Less than 4 hospitals available.")
+                    }
+                } else {
+                    Log.d("HospitalDetails", "Document not found.")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("HospitalDetails", "Error fetching hospitals: ${exception.message}")
+                Toast.makeText(this, "Error fetching hospitals: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
 
 
 

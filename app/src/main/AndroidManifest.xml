@@ -55,6 +55,13 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
 
+        <activity
+            android:name=".article.ArticlesListActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+
+
 
 
         <activity
