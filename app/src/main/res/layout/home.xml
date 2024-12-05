@@ -157,9 +157,11 @@
                     android:orientation="vertical"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
+                        android:id="@+id/hospital"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@null"
                         android:src="@drawable/hospital" />
 
                     <TextView
@@ -178,9 +180,11 @@
                     android:orientation="vertical"
                     android:gravity="center">
 
-                    <ImageView
+                    <ImageButton
+                        android:id="@+id/ambulance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@null"
                         android:src="@drawable/emergency_services" />
 
                     <TextView

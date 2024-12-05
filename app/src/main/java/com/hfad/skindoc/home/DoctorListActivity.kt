@@ -3,6 +3,7 @@ package com.hfad.skindoc.home
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.AdapterView
 import android.widget.ImageButton
 import android.widget.Toast
@@ -50,9 +51,6 @@ class DoctorListActivity : AppCompatActivity() {
         citySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
                 selectedCity = parentView?.getItemAtPosition(position).toString()
-
-
-
                 doctorList.clear()
                 doctorAdapter.notifyDataSetChanged()
                 fetchDoctors()
@@ -116,6 +114,7 @@ class DoctorListActivity : AppCompatActivity() {
                                 contact = doctorMap["contact"] ?: "Unknown"
                             )
                             doctorList.add(doctor)
+                            Log.d("OKKKKK", doctorList.toString())
                         }
                         doctorAdapter.notifyDataSetChanged()
                     } else {

@@ -49,6 +49,12 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
 
+        <activity
+            android:name=".hospital.HospitalActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+
 
 
         <activity

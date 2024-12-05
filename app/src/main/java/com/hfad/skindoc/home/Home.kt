@@ -1,6 +1,7 @@
 package com.hfad.skindoc.home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -16,6 +17,7 @@ import com.hfad.skindoc.chatbot.ChatBotActivity
 import com.hfad.skindoc.event.EventsActivity
 import com.hfad.skindoc.R
 import com.hfad.skindoc.appointment.DoctorDetailAppointmentActivity
+import com.hfad.skindoc.hospital.HospitalActivity
 import com.hfad.skindoc.pharmacy.pharmacy
 import com.hfad.skindoc.userprofile.UserProfileActivity
 
@@ -40,6 +42,8 @@ class Home : AppCompatActivity() {
         val btn_see_more_article = findViewById<Button>(R.id.article_see_more)
         val btn_doctor = findViewById<ImageButton>(R.id.doctor_image)
         val btn_pahrmacy = findViewById<ImageButton>(R.id.pharmacy)
+        val btn_ambulance = findViewById<ImageButton>(R.id.ambulance)
+        val btn_hospital = findViewById<ImageButton>(R.id.hospital)
 
         val doc_name_1 = findViewById<TextView>(R.id.doc_name_1)
         val contact_1 = findViewById<TextView>(R.id.contact_1)
@@ -62,6 +66,11 @@ class Home : AppCompatActivity() {
 
         btn_pahrmacy.setOnClickListener {
             val intent = Intent(this, pharmacy::class.java)
+            startActivity(intent)
+        }
+
+        btn_hospital.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
             startActivity(intent)
         }
 
@@ -103,6 +112,13 @@ class Home : AppCompatActivity() {
             val intent = Intent(this, DoctorListActivity::class.java)
             startActivity(intent)
         }
+
+        btn_ambulance.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:108")
+            startActivity(intent)
+        }
+
     }
 
     private fun fetchDoctorDetails(
