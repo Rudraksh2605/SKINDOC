@@ -61,6 +61,12 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
 
+        <activity
+            android:name=".event.EventsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+
 
 
 

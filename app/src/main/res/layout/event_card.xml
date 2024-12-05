@@ -1,0 +1,53 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <TextView
+            android:id="@+id/tv_doctor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dr. Janet Alexander Castelino"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_appointment_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: 7"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tv_appointment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time: 02:00 PM"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tv_doctor_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City: Bengaluru"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

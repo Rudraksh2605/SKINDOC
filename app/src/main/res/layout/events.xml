@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -23,7 +24,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Articles"
+            android:text="Events"
             android:fontFamily="@font/poppinsbold"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -48,7 +49,7 @@
         app:dividerColor="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/article"
+        android:id="@+id/events"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_below="@id/divider"
@@ -249,6 +250,5 @@
 
         </LinearLayout>
     </com.google.android.material.appbar.MaterialToolbar>
-
 
 </RelativeLayout>
