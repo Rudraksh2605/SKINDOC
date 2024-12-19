@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.google.gms.google.services) }
+    alias(libs.plugins.google.gms.google.services)
+}
 
 android {
     namespace = "com.hfad.skindoc"
@@ -26,31 +27,50 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    aaptOptions {
+        noCompress("tflite")
+    }
+
     kotlinOptions {
         jvmTarget = "11"
     }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.database)
+
+    // Firebase dependencies
+    implementation("com.google.firebase:firebase-auth:23.1.0")
+    implementation("com.google.firebase:firebase-database:21.0.0")
+    implementation("com.google.firebase:firebase-firestore:25.1.1")
+    implementation("com.google.firebase:firebase-messaging:24.1.0")
+
+    // Google Play Services
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    // Kommunicate SDK
+    implementation("io.kommunicate.sdk:kommunicateui:2.7.2")
+
+
+    // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.google.gms:google-services:4.4.2")
-    implementation("com.google.firebase:firebase-auth:23.1.0")
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
-    implementation("com.google.firebase:firebase-database:21.0.0")
-    implementation("com.google.firebase:firebase-firestore:25.1.1")
 
+    // Google Services plugin
+    implementation("com.google.gms:google-services:4.4.2")
+
+    implementation("org.tensorflow:tensorflow-lite:2.12.0")
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.3")
 }
+

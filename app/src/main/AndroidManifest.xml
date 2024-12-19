@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,75 +13,80 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
-        tools:targetApi="31"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <!-- Start Activity -->
         <activity
             android:name=".auth.Start"
-            android:exported="true" />
-
-        <!-- LogIn Activity -->
-        <activity
-            android:name=".auth.LogIn"
-            android:exported="true"
-            />
-
-        <!-- SignUp Activity -->
-        <activity
-            android:name=".auth.SignUp"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-             />
-
-        <activity
-            android:name=".home.DoctorListActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
-
-        <activity
-            android:name=".appointment.DoctorDetailAppointmentActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
-
-        <activity
-            android:name=".pharmacy.pharmacy"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
-
-        <activity
-            android:name=".hospital.HospitalActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
-
-        <activity
-            android:name=".article.ArticlesListActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
-
-        <activity
-            android:name=".event.EventsActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
-
-
-
-
-        <activity
-            android:name=".home.Home"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- LogIn Activity -->
+        <activity
+            android:name=".auth.LogIn"
+            android:exported="true" />
+
+        <!-- SignUp Activity -->
+        <activity
+            android:name=".auth.SignUp"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- Doctor List Activity -->
+        <activity
+            android:name=".home.DoctorListActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- Doctor Detail Appointment Activity -->
+        <activity
+            android:name=".appointment.DoctorDetailAppointmentActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- Pharmacy Activity -->
+        <activity
+            android:name=".pharmacy.pharmacy"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- Hospital Activity -->
+        <activity
+            android:name=".hospital.HospitalActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- Articles List Activity -->
+        <activity
+            android:name=".article.ArticlesListActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- Events Activity -->
+        <activity
+            android:name=".event.EventsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- Chatbot Activity -->
+        <activity
+            android:name=".chatbot.ChatBotActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- Home Activity -->
+        <activity
+            android:name=".home.Home"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+
+        <meta-data
+            android:name="com.applozic.applicationKey"
+            android:value="mZoZjc2nbhXzsfIovLpZVa4zVpNfn3Js" />
     </application>
 </manifest>

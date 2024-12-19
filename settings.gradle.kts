@@ -9,13 +9,20 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+
+
+        maven("https://kommunicate.jfrog.io/artifactory/kommunicate-android-sdk")
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+
+
+        maven("https://kommunicate.jfrog.io/artifactory/kommunicate-android-sdk")
     }
 }
 
