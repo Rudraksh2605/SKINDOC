@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:text="Doctor"
                         android:fontFamily="@font/acorn"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:text="Pharmacy"
                         android:fontFamily="@font/acorn"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -171,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:text="Hospital"
                         android:fontFamily="@font/acorn"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -194,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:text="Ambulance"
                         android:fontFamily="@font/acorn"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:gravity="center" />
                 </LinearLayout>
             </LinearLayout>
@@ -775,8 +775,6 @@
 
         </LinearLayout>
     </com.google.android.material.appbar.MaterialToolbar>
-
-
 
 
 </RelativeLayout>
