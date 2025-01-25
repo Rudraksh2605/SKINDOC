@@ -1,8 +1,10 @@
 package com.hfad.skindoc.appointment
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.hfad.skindoc.R
+import com.hfad.skindoc.chatbot.ChatBotActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -32,6 +35,11 @@ class DoctorDetailAppointmentActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.doctorName).text = doctorName
         findViewById<TextView>(R.id.doctorCity).text = doctorCity
+        val bot = findViewById<ImageButton>(R.id.chat_bot)
+        bot.setOnClickListener {
+            val intent = Intent(this, ChatBotActivity::class.java)
+            startActivity(intent)
+        }
 
         val aboutDoc = findViewById<TextView>(R.id.aboutText)
         val doctorSpecialty = "Dermatologist"

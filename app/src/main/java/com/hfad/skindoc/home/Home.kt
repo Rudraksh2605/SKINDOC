@@ -3,11 +3,13 @@ package com.hfad.skindoc.home
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +26,13 @@ import com.hfad.skindoc.userprofile.UserProfileActivity
 class Home : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
+    private lateinit var imageView: ImageView
+    private val imageList = arrayOf(
+        R.drawable.banner, // Add your images here
+        R.drawable.banner2,
+    )
+    private var currentIndex = 0
+    private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +41,11 @@ class Home : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
 
         fetchHospitalDetails()
+
+        imageView = findViewById(R.id.image_slideshow)
+
+
+        startSlideshow()
 
 
         val btn_user = findViewById<ImageButton>(R.id.user)
@@ -228,11 +242,33 @@ class Home : AppCompatActivity() {
                 Toast.makeText(this, "Error fetching hospitals: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
     }
+    private fun startSlideshow() {
+        val updateImageRunnable = object : Runnable {
+            override fun run() {
+                // Set the current image
+                imageView.setImageResource(imageList[currentIndex])
+
+
+                currentIndex = (currentIndex + 1) % imageList.size
+
+
+                handler.postDelayed(this, 3000)
+            }
+        }
+
+        // Start the first image change
+        handler.post(updateImageRunnable)
+    }
 
 
 
 
     companion object {
         const val CAMERA_REQUEST_CODE = 101
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
     }
 }

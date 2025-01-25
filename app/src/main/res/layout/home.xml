@@ -18,14 +18,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SkinDoc"
-            android:fontFamily="@font/poppinsbold"
+            android:fontFamily="@font/acorn"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="40sp"
             android:gravity="center"
             android:layout_gravity="start"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp" />
+            />
 
         <ImageButton
             android:id="@+id/user"
@@ -63,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
+                android:layout_margin="10dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
 
@@ -93,6 +94,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+
             <!-- Categories -->
             <LinearLayout
                 android:id="@+id/categories"
@@ -121,8 +123,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Doctor"
-                        android:fontFamily="@font/popinslight"
-                        android:textSize="12sp"
+                        android:fontFamily="@font/acorn"
+                        android:textSize="16sp"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -145,8 +147,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pharmacy"
-                        android:fontFamily="@font/popinslight"
-                        android:textSize="12sp"
+                        android:fontFamily="@font/acorn"
+                        android:textSize="16sp"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -168,8 +170,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hospital"
-                        android:fontFamily="@font/popinslight"
-                        android:textSize="12sp"
+                        android:fontFamily="@font/acorn"
+                        android:textSize="16sp"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -191,11 +193,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ambulance"
-                        android:fontFamily="@font/popinslight"
-                        android:textSize="12sp"
+                        android:fontFamily="@font/acorn"
+                        android:textSize="16sp"
                         android:gravity="center" />
                 </LinearLayout>
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/image_slideshow"
+                android:layout_width="380dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/banner"
+                android:layout_gravity="center" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -408,7 +418,7 @@
                     android:layout_height="wrap_content"
                     android:text="See More"
                     android:layout_marginTop="20dp"
-                    android:textSize="11sp"
+                    android:textSize="11dp"
                     android:background="@null"
                     android:fontFamily="@font/poppinsmedium" />
             </LinearLayout>
@@ -618,8 +628,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Article"
-                        android:fontFamily="@font/popinslight"
-                        android:textSize="12sp"
+                        android:fontFamily="@font/acorn"
+                        android:textSize="14sp"
                         android:gravity="center" />
                 </LinearLayout>
             </FrameLayout>
@@ -651,8 +661,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Home"
-                        android:fontFamily="@font/popinslight"
-                        android:textSize="12sp"
+                        android:fontFamily="@font/acorn"
+                        android:textSize="14sp"
                         android:gravity="center" />
                 </LinearLayout>
             </FrameLayout>
@@ -687,8 +697,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Scanner"
-                        android:fontFamily="@font/popinslight"
-                        android:textSize="12sp"
+                        android:fontFamily="@font/acorn"
+                        android:textSize="14sp"
                         android:gravity="center" />
                 </LinearLayout>
             </FrameLayout>
@@ -723,8 +733,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Events"
-                        android:fontFamily="@font/popinslight"
-                        android:textSize="12sp"
+                        android:fontFamily="@font/acorn"
+                        android:textSize="14sp"
                         android:gravity="center" />
                 </LinearLayout>
             </FrameLayout>
@@ -757,8 +767,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Assist"
-                        android:fontFamily="@font/popinslight"
-                        android:textSize="12sp"
+                        android:fontFamily="@font/acorn"
+                        android:textSize="14sp"
                         android:gravity="center" />
                 </LinearLayout>
             </FrameLayout>

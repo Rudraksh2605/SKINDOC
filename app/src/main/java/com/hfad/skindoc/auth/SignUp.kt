@@ -91,26 +91,6 @@ class SignUp : AppCompatActivity() {
             }
     }
 
-    private fun showWelcomeDialog() {
-        val dialog = Dialog(this)
-        dialog.setContentView(R.layout.welocme_signup)
-        dialog.setCancelable(false)
-
-        val buttonGoToHome = dialog.findViewById<Button>(R.id.buttonGoToHome)
-        buttonGoToHome.setOnClickListener {
-            dialog.dismiss()
-            val intent = Intent(this, Start::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        dialog.window?.setLayout(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialog.show()
-    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

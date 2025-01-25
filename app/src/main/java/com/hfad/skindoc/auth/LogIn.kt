@@ -2,6 +2,7 @@ package com.hfad.skindoc.auth
 
 import android.app.Dialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -24,11 +25,15 @@ class LogIn : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var sharedPreferences: SharedPreferences
     private val RC_SIGN_IN = 100 // Request code for Google Sign-In
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
+
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
         val backButton = findViewById<ImageButton>(R.id.toolbar_back)
         backButton.setOnClickListener {
@@ -48,6 +53,7 @@ class LogIn : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            saveUserToCache(email) // Save user to cache
                             showCustomDialog() // Show welcome dialog
                         } else {
                             Toast.makeText(
@@ -95,6 +101,7 @@ class LogIn : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    saveUserToCache(account?.email ?: "Unknown") // Save user to cache
                     showCustomDialog() // Show welcome dialog for Google login
                 } else {
                     Toast.makeText(
@@ -104,6 +111,14 @@ class LogIn : AppCompatActivity() {
                     ).show()
                 }
             }
+    }
+
+    private fun saveUserToCache(email: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("UserEmail", email)
+        editor.putBoolean("IsLoggedIn", true)
+        editor.apply()
+        Log.d("SharedPreferences", "User saved to cache: $email")
     }
 
     private fun showCustomDialog() {
@@ -128,6 +143,4 @@ class LogIn : AppCompatActivity() {
         dialog.setCancelable(true)
         dialog.show()
     }
-
 }
-
