@@ -97,7 +97,7 @@ class DoctorDetailAppointmentActivity : AppCompatActivity() {
             timeSlotView.setTextColor(ContextCompat.getColor(this, R.color.black))
         }
 
-        val tintColor = ContextCompat.getColor(this, R.color.cale)
+        val tintColor = ContextCompat.getColor(this, R.color.blue)
         val textColor = ContextCompat.getColor(this, R.color.white)
 
         selectedView.backgroundTintList = ColorStateList.valueOf(tintColor)

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
     android:layout_gravity="center"
+    android:background="@drawable/gradient"
     android:padding="16dp">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -92,7 +93,7 @@
         android:layout_height="wrap_content"
         android:text="Login"
         android:textSize="17dp"
-        android:backgroundTint="@color/LoginBtn"
+        android:backgroundTint="@color/blue"
         android:textColor="@android:color/white"
         android:fontFamily="@font/poppinsmedium"
         android:layout_centerInParent="true"
@@ -127,8 +128,6 @@
         android:id="@+id/tv_or"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OR"
-        android:background="@color/white"
         android:textColor="@color/LoginBtn"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tv_signup"

@@ -74,6 +74,7 @@
                 android:fontFamily="@font/poppinsbold"
                 android:text="Go to Home"
                 android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/blue"
                 android:textColor="@color/white" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

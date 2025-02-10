@@ -24,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
         val videoView: VideoView = findViewById(R.id.videoView)
 
 
-        val videoUri = Uri.parse("android.resource://$packageName/${R.raw.skindoc}")
+        val videoUri = Uri.parse("android.resource://$packageName/${R.raw.s}")
         videoView.setVideoURI(videoUri)
         videoView.start()
 

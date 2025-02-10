@@ -28,7 +28,7 @@ class CalendarCardAdapter(
 
             if (position == selectedPosition) {
                 linearLayout.backgroundTintList =
-                    itemView.context.getColorStateList(R.color.cale)
+                    itemView.context.getColorStateList(R.color.blue)
                 dayTextView.setTextColor(itemView.context.getColor(R.color.white))
                 dateTextView.setTextColor(itemView.context.getColor(R.color.white))
             } else {

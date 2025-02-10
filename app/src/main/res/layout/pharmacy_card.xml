@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:background="@drawable/gradient"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
@@ -40,6 +41,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Buy Now"
                 android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/blue"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:padding="12dp"
