@@ -16,7 +16,7 @@
             android:id="@+id/toolbar_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/toolbar_back"
+            android:src="@drawable/back_svg"
             android:layout_marginStart="10dp"
             android:layout_gravity="start"
             android:background="@color/white" />
@@ -26,10 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pharmacy"
-            android:fontFamily="@font/poppinsbold"
+            android:fontFamily="@font/acorn"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="35dp"
             android:layout_gravity="center" />
 
         <ImageButton
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="15dp"
-            android:src="@drawable/user"
+            android:src="@drawable/user_svg"
             android:background="@null" />
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -97,7 +97,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/article" />
+                        android:src="@drawable/article_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/home" />
+                        android:src="@drawable/home_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -166,13 +166,13 @@
                         android:paddingTop="1dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/scanner" />
+                        android:src="@drawable/camera_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Scanner"
+                        android:text="Camera"
                         android:fontFamily="@font/popinslight"
                         android:textSize="12sp"
                         android:gravity="center" />
@@ -202,7 +202,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/schedule" />
+                        android:src="@drawable/contact_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -236,7 +236,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/chat_bot" />
+                        android:src="@drawable/chatbot_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"

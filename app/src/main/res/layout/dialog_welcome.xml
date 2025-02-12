@@ -27,7 +27,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/check_ic" />
+                android:src="@drawable/check_svg" />
 
             <TextView
                 android:id="@+id/textTitle"

@@ -69,26 +69,27 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/chrome"
+                    android:src="@drawable/chrome_svg"
                     android:background="@null"
                     android:contentDescription="Open Browser" />
 
                 <!-- Telephone Button -->
+
+                <!-- Map Button -->
                 <ImageButton
                     android:id="@+id/call_button"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/telephone"
                     android:background="@null"
-                    android:contentDescription="Call" />
+                    android:contentDescription="Call"
+                    android:src="@drawable/call_svg" />
 
-                <!-- Map Button -->
                 <ImageButton
                     android:id="@+id/direction_button"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/arrow"
+                    android:src="@drawable/maps_svg"
                     android:background="@null"
                     android:contentDescription="Get Directions" />
             </LinearLayout>

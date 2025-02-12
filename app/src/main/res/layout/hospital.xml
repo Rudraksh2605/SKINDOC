@@ -17,10 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hospital"
-            android:fontFamily="@font/poppinsbold"
+            android:fontFamily="@font/acorn"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="35dp"
             android:gravity="center"
             android:layout_gravity="start"
             android:layout_marginStart="10dp"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="32dp"
             android:layout_marginBottom="6dp"
             android:gravity="end"
             android:layout_gravity="end"
@@ -46,6 +46,7 @@
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="5dp"
         app:dividerColor="@color/black" />
 
 
@@ -108,7 +109,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/article" />
+                        android:src="@drawable/article_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -141,7 +142,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/home" />
+                        android:src="@drawable/home_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -177,13 +178,13 @@
                         android:paddingTop="1dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/scanner" />
+                        android:src="@drawable/camera_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Scanner"
+                        android:text="Camera"
                         android:fontFamily="@font/popinslight"
                         android:textSize="12sp"
                         android:gravity="center" />
@@ -213,7 +214,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/schedule" />
+                        android:src="@drawable/contact_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -247,7 +248,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/chat_bot" />
+                        android:src="@drawable/chatbot_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"

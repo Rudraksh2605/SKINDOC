@@ -19,22 +19,23 @@
             android:id="@+id/toolbar_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/toolbar_back"
+            android:src="@drawable/back_svg"
+            android:layout_marginTop="15sp"
             android:layout_gravity="start"
-            android:background="@color/white"
+            android:background="@null"
              />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:fontFamily="@font/poppinsbold"
+            android:fontFamily="@font/acorn"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:paddingTop="4dp"
             android:layout_centerInParent="true"
-            android:textSize="20dp" />
+            android:textSize="35dp" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -142,7 +143,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Sign in with Google"
-        android:drawableLeft="@drawable/google"
+        android:drawableLeft="@drawable/google_svg"
         android:paddingLeft="15dp"
         android:fontFamily="@font/poppinsmedium"
         android:layout_below="@id/tv_or"
@@ -157,17 +158,16 @@
         android:id="@+id/btn_apple_login"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Sign in with Apple"
-        android:fontFamily="@font/poppinsmedium"
-        android:drawableLeft="@drawable/apple"
-        android:paddingLeft="15dp"
         android:layout_below="@id/btn_google_login"
+        android:layout_centerVertical="true"
         android:layout_marginTop="16dp"
         android:background="@drawable/google_button_background"
+        android:drawableLeft="@drawable/apple_svg"
+        android:fontFamily="@font/poppinsmedium"
+        android:paddingLeft="15dp"
+        android:text="Sign in with Apple"
         android:textColor="@android:color/black"
-        android:textSize="16dp"
-        android:layout_centerInParent="true"
-        />
+        android:textSize="16dp" />
 
     <Button
         android:id="@+id/btn_github_login"
@@ -177,7 +177,7 @@
         android:fontFamily="@font/poppinsmedium"
         android:layout_below="@id/btn_apple_login"
         android:paddingLeft="15dp"
-        android:drawableLeft="@drawable/github"
+        android:drawableLeft="@drawable/github_svg"
         android:layout_marginTop="16dp"
         android:background="@drawable/google_button_background"
         android:textColor="@android:color/black"

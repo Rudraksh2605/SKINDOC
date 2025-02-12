@@ -35,7 +35,7 @@
             android:background="@null"
             android:layout_gravity="end"
             android:layout_marginEnd="15dp"
-            android:src="@drawable/user" />
+            android:src="@drawable/user_svg" />
     </com.google.android.material.appbar.MaterialToolbar>
 
     <com.google.android.material.divider.MaterialDivider
@@ -119,9 +119,9 @@
                         android:id="@+id/doctor_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
                         android:background="@null"
-                        android:src="@drawable/doctor" />
+                        android:clickable="true"
+                        android:src="@drawable/doctor_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:paddingLeft="5dp"
-                        android:src="@drawable/medicine" />
+                        android:src="@drawable/pharmacy" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -168,7 +168,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:src="@drawable/hospital" />
+                        android:src="@drawable/hospital_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -191,7 +191,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:src="@drawable/emergency_services" />
+                        android:src="@drawable/ambulance_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -627,7 +627,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/article" />
+                        android:src="@drawable/article_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -660,7 +660,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/home" />
+                        android:src="@drawable/home_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -696,13 +696,13 @@
                         android:paddingTop="1dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/scanner" />
+                        android:src="@drawable/camera_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Scanner"
+                        android:text="Camera"
                         android:fontFamily="@font/acorn"
                         android:textSize="14sp"
                         android:gravity="center" />
@@ -732,7 +732,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/schedule" />
+                        android:src="@drawable/contact_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -766,7 +766,7 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:src="@drawable/chat_bot" />
+                        android:src="@drawable/chatbot_svg" />
 
                     <TextView
                         android:layout_width="wrap_content"
