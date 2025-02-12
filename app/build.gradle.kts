@@ -40,6 +40,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        mlModelBinding = true
+    }
 }
 
 dependencies {
@@ -60,6 +63,8 @@ dependencies {
 
     // Kommunicate SDK
     implementation("io.kommunicate.sdk:kommunicateui:2.7.2")
+    implementation(libs.tensorflow.lite.metadata)
+    implementation(libs.tensorflow.lite.gpu)
 
 
     // Testing dependencies

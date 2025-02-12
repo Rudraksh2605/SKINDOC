@@ -1,6 +1,7 @@
 package com.hfad.skindoc.home
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -20,8 +21,15 @@ import com.hfad.skindoc.event.EventsActivity
 import com.hfad.skindoc.R
 import com.hfad.skindoc.appointment.DoctorDetailAppointmentActivity
 import com.hfad.skindoc.hospital.HospitalActivity
+import com.hfad.skindoc.ml.Tfmodel
+import com.hfad.skindoc.ml.ml
 import com.hfad.skindoc.pharmacy.pharmacy
 import com.hfad.skindoc.userprofile.UserProfileActivity
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
+import kotlin.jvm.java
 
 class Home : AppCompatActivity() {
 
@@ -33,6 +41,7 @@ class Home : AppCompatActivity() {
     )
     private var currentIndex = 0
     private val handler = Handler()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +70,8 @@ class Home : AppCompatActivity() {
         val btn_pahrmacy = findViewById<ImageButton>(R.id.pharmacy)
         val btn_ambulance = findViewById<ImageButton>(R.id.ambulance)
         val btn_hospital = findViewById<ImageButton>(R.id.hospital)
+
+
 
 
         val doc_name_1 = findViewById<TextView>(R.id.doc_name_1)
@@ -142,6 +153,92 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+
+
+            val resultMap = classifyImage(imageBitmap)
+
+
+            val intent = Intent(this, ml::class.java)
+
+
+            val bundle = Bundle()
+            bundle.putSerializable("resultMap", resultMap)
+            intent.putExtras(bundle)
+
+
+            intent.putExtra("imageBitmap", imageBitmap)
+
+
+            startActivity(intent)
+        }
+    }
+
+
+
+    fun classifyImage(bitmap: Bitmap): HashMap<String, Float> {
+        val resultMap = HashMap<String, Float>()
+        try {
+            val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
+            val byteBuffer = convertBitmapToByteBuffer(resizedBitmap)
+
+            val model = Tfmodel.newInstance(this)
+
+            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
+            inputFeature0.loadBuffer(byteBuffer)
+
+            val outputs = model.process(inputFeature0)
+            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+
+            val results = outputFeature0.floatArray
+            val predictedClass = results.indices.maxByOrNull { results[it] } ?: -1
+            val confidenceScore = if (predictedClass != -1) results[predictedClass] else 0.0f
+
+            Log.d("MLRESULT", "$predictedClass")
+
+
+
+            model.close()
+
+            resultMap["predictedClass"] = predictedClass.toFloat()
+            resultMap["confidenceScore"] = confidenceScore
+
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return resultMap
+    }
+
+    private fun convertBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
+        val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
+        byteBuffer.order(ByteOrder.nativeOrder())
+
+        val intValues = IntArray(224 * 224)
+        bitmap.getPixels(intValues, 0, 224, 0, 0, 224, 224)
+
+        var pixelIndex = 0
+        for (i in 0 until 224) {
+            for (j in 0 until 224) {
+                val pixelValue = intValues[pixelIndex++]
+
+
+                val r = (pixelValue shr 16 and 0xFF) / 255.0f
+                val g = (pixelValue shr 8 and 0xFF) / 255.0f
+                val b = (pixelValue and 0xFF) / 255.0f
+
+                byteBuffer.putFloat(r)
+                byteBuffer.putFloat(g)
+                byteBuffer.putFloat(b)
+            }
+        }
+        return byteBuffer
     }
 
     private fun fetchDoctorDetails(
