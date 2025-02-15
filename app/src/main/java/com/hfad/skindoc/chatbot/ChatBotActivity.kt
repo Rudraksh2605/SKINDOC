@@ -1,39 +1,53 @@
 package com.hfad.skindoc.chatbot
 
-import android.content.SharedPreferences
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
+import android.webkit.WebResourceRequest
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.hfad.skindoc.R
-import io.kommunicate.KmConversationBuilder
-import io.kommunicate.Kommunicate
-import io.kommunicate.callbacks.KmCallback
 
 class ChatBotActivity : AppCompatActivity() {
 
+    private lateinit var chatBotView: WebView
+
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_bot)
 
-        val sharedPreferences: SharedPreferences = getSharedPreferences("applozic", MODE_PRIVATE)
-        sharedPreferences.edit().clear().apply()
+        chatBotView = findViewById(R.id.chatbot_view)
 
+        // Set up WebView settings
+        val webSettings: WebSettings = chatBotView.settings
+        webSettings.javaScriptEnabled = true
+        webSettings.domStorageEnabled = true // Enable localStorage support
+        webSettings.allowFileAccess = true
+        webSettings.allowContentAccess = true
+        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW // Fix potential content loading issues
 
-        Kommunicate.init(this, "2a358c41671e4210b93cac6c6c0b77d7e")
+        // Ensure links open within the WebView instead of an external browser
+        chatBotView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                return false // Allow WebView to handle all links
+            }
+        }
 
+        // Load the Botpress WebChat URL
+        chatBotView.loadUrl("https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/02/14/19/20250214192417-HT3U6I8R.json")
 
-        KmConversationBuilder(this)
-            .setSingleConversation(true)
-            .launchConversation(object : KmCallback {
-                override fun onSuccess(message: Any?) {
-
-
+        // Handle back press inside WebView
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (chatBotView.canGoBack()) {
+                    chatBotView.goBack()
+                } else {
+                    finish()
                 }
-
-                override fun onFailure(error: Any?) {
-
-                    Log.d("Failed to launch chatbot: ", error.toString())
-                }
-            })
+            }
+        })
     }
 }
