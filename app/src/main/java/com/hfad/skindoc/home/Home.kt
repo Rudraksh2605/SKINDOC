@@ -1,11 +1,10 @@
 package com.hfad.skindoc.home
 
+import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -21,28 +20,40 @@ import com.hfad.skindoc.event.EventsActivity
 import com.hfad.skindoc.R
 import com.hfad.skindoc.appointment.DoctorDetailAppointmentActivity
 import com.hfad.skindoc.hospital.HospitalActivity
-import com.hfad.skindoc.ml.Tfmodel
-import com.hfad.skindoc.ml.ml
 import com.hfad.skindoc.pharmacy.pharmacy
 import com.hfad.skindoc.userprofile.UserProfileActivity
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
 import kotlin.jvm.java
+import android.content.ContentResolver
+import android.provider.OpenableColumns
+import java.io.File
+import com.hfad.skindoc.ml.MyApi
+import com.hfad.skindoc.ml.UploadRequestBody
+import com.hfad.skindoc.ml.UploadResponse
+
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Response
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import retrofit2.Call
+import retrofit2.Callback
+
+
 
 class Home : AppCompatActivity() {
+
 
     private lateinit var db: FirebaseFirestore
     private lateinit var imageView: ImageView
     private val imageList = arrayOf(
-        R.drawable.banner, // Add your images here
+        R.drawable.banner,
         R.drawable.banner2,
     )
     private var currentIndex = 0
     private val handler = Handler()
-
-
+    private var selectedImageUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
@@ -70,8 +81,6 @@ class Home : AppCompatActivity() {
         val btn_pahrmacy = findViewById<ImageButton>(R.id.pharmacy)
         val btn_ambulance = findViewById<ImageButton>(R.id.ambulance)
         val btn_hospital = findViewById<ImageButton>(R.id.hospital)
-
-
 
 
         val doc_name_1 = findViewById<TextView>(R.id.doc_name_1)
@@ -118,8 +127,7 @@ class Home : AppCompatActivity() {
         }
 
         btn_scanner.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(intent, CAMERA_REQUEST_CODE)
+            openImageChooser()
         }
 
         btn_event.setOnClickListener {
@@ -155,91 +163,119 @@ class Home : AppCompatActivity() {
 
     }
 
+    private fun openImageChooser() {
+        // Open image picker intent
+        Intent(Intent.ACTION_PICK).also {
+            it.type = "image/*"  // Allow only images to be selected
+            startActivityForResult(it, GALLERY_REQUEST_CODE)  // Start the activity to pick an image
+        }
+    }
+
+
+
+
+
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-
-
-            val resultMap = classifyImage(imageBitmap)
-
-
-            val intent = Intent(this, ml::class.java)
-
-
-            val bundle = Bundle()
-            bundle.putSerializable("resultMap", resultMap)
-            intent.putExtras(bundle)
-
-
-            intent.putExtra("imageBitmap", imageBitmap)
-
-
-            startActivity(intent)
-        }
-    }
-
-
-
-    fun classifyImage(bitmap: Bitmap): HashMap<String, Float> {
-        val resultMap = HashMap<String, Float>()
-        try {
-            val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
-            val byteBuffer = convertBitmapToByteBuffer(resizedBitmap)
-
-            val model = Tfmodel.newInstance(this)
-
-            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-            inputFeature0.loadBuffer(byteBuffer)
-
-            val outputs = model.process(inputFeature0)
-            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-
-            val results = outputFeature0.floatArray
-            val predictedClass = results.indices.maxByOrNull { results[it] } ?: -1
-            val confidenceScore = if (predictedClass != -1) results[predictedClass] else 0.0f
-
-            Log.d("MLRESULT", "$predictedClass")
-
-
-
-            model.close()
-
-            resultMap["predictedClass"] = predictedClass.toFloat()
-            resultMap["confidenceScore"] = confidenceScore
-
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return resultMap
-    }
-
-    private fun convertBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
-        val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
-        byteBuffer.order(ByteOrder.nativeOrder())
-
-        val intValues = IntArray(224 * 224)
-        bitmap.getPixels(intValues, 0, 224, 0, 0, 224, 224)
-
-        var pixelIndex = 0
-        for (i in 0 until 224) {
-            for (j in 0 until 224) {
-                val pixelValue = intValues[pixelIndex++]
-
-
-                val r = (pixelValue shr 16 and 0xFF) / 255.0f
-                val g = (pixelValue shr 8 and 0xFF) / 255.0f
-                val b = (pixelValue and 0xFF) / 255.0f
-
-                byteBuffer.putFloat(r)
-                byteBuffer.putFloat(g)
-                byteBuffer.putFloat(b)
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // Get the selected image URI
+            selectedImageUri = data?.data
+            selectedImageUri?.let {
+                imageView.setImageURI(it)  // Display the selected image in ImageView
+                uploadImage(it)  // Start the upload process for the selected image
             }
         }
-        return byteBuffer
     }
+
+
+    private fun uploadImage(imageUri: Uri) {
+        // Convert the image URI to a file
+        val contentResolver = contentResolver
+        val parcelFileDescriptor = contentResolver.openFileDescriptor(imageUri, "r", null) ?: return
+        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+        val file = File(cacheDir, getFileName(imageUri))
+        val outputStream = FileOutputStream(file)
+
+        // Copy the contents from InputStream to OutputStream
+        inputStream.copyTo(outputStream)
+
+        // Create a request body for the image to upload
+        val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+
+        // Create description text for the image
+        val description = "Sample Image".toRequestBody("text/plain".toMediaTypeOrNull())
+
+
+        // API call to upload the image
+        val apiService = MyApi.create()
+        val call: Call<UploadResponse> = apiService.uploadImage(body, description)
+
+        // Make the API call asynchronously
+        call.enqueue(object : Callback<UploadResponse> {
+            override fun onResponse(call: Call<UploadResponse>, response: Response<UploadResponse>) {
+                if (response.isSuccessful) {
+                    Log.d("Upload", "Image uploaded successfully!")
+                    Toast.makeText(this@Home, "Image uploaded successfully!", Toast.LENGTH_SHORT).show()
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("Upload", "Upload failed: ${response.code()} - $errorBody")
+                    Toast.makeText(this@Home, "Upload failed: ${response.code()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
+            override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
+                Log.e("Upload", "Error uploading image: ${t.message}")
+                t.printStackTrace()  // Print stack trace for better debugging
+                Toast.makeText(this@Home, "Upload failed: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
+
+
+
+
+
+    private fun getFileName(uri: Uri): String {
+        var name = "temp_image"
+        val cursor = contentResolver.query(uri, null, null, null, null)
+        cursor?.use {
+            val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            if (nameIndex != -1) {
+                it.moveToFirst()
+                name = it.getString(nameIndex)
+            }
+        }
+        return name
+    }
+
+
+    private fun ContentResolver.getFileName(uri: Uri): String {
+        var name = ""
+        val returnCursor = this.query(uri, null, null, null, null)
+        returnCursor?.use {
+            val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            it.moveToFirst()
+            name = it.getString(nameIndex)
+        }
+        return name
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     private fun fetchDoctorDetails(
         docName1: TextView, contact1: TextView,
@@ -362,6 +398,7 @@ class Home : AppCompatActivity() {
 
     companion object {
         const val CAMERA_REQUEST_CODE = 101
+        const val GALLERY_REQUEST_CODE = 102
     }
 
     override fun onDestroy() {
