@@ -32,14 +32,7 @@
             android:textSize="30dp"
             android:layout_gravity="center" />
 
-        <ImageButton
-            android:id="@+id/user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="15dp"
-            android:src="@drawable/user_svg"
-            android:background="@null" />
+
     </com.google.android.material.appbar.MaterialToolbar>
 
     <com.google.android.material.divider.MaterialDivider

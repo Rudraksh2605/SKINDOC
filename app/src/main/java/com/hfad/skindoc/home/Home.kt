@@ -3,6 +3,7 @@ package com.hfad.skindoc.home
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.view.View
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -25,6 +26,12 @@ import com.hfad.skindoc.userprofile.UserProfileActivity
 import kotlin.jvm.java
 import android.content.ContentResolver
 import android.provider.OpenableColumns
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hfad.skindoc.ml.ApiResponse
 import java.io.File
 import com.hfad.skindoc.ml.MyApi
@@ -70,8 +77,10 @@ class Home : AppCompatActivity() {
         startSlideshow()
 
 
-        val btn_user = findViewById<ImageButton>(R.id.user)
+
         val et_search_text = findViewById<EditText>(R.id.et_search_box)
+        val searchResults = findViewById<ListView>(R.id.search_results)
+
         val btn_article = findViewById<ImageButton>(R.id.nav_article)
         val btn_home = findViewById<ImageButton>(R.id.nav_home)
         val btn_scanner = findViewById<ImageButton>(R.id.nav_scanner)
@@ -99,13 +108,26 @@ class Home : AppCompatActivity() {
 
         fetchDoctorDetails(doc_name_1, contact_1, doc_name_2, contact_2, doc_name_3, contact_3, doc_name_4, contact_4)
 
-        btn_see_more_hospital.setOnClickListener {
-            val intent = Intent(this, HospitalActivity::class.java)
-            startActivity(intent)
-        }
+        et_search_text.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val queryText = s.toString().trim()
+                if (queryText.isNotEmpty()) {
+                    searchResults.visibility = View.VISIBLE // Show ListView when typing
+                    fetchSearchResults(queryText)
+                } else {
+                    searchResults.visibility = View.GONE // Hide ListView when empty
+                }
+            }
 
-        btn_user.setOnClickListener {
-            val intent = Intent(this, UserProfileActivity::class.java)
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+
+
+            btn_see_more_hospital.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
             startActivity(intent)
         }
 
@@ -163,6 +185,40 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    private fun fetchSearchResults(query: String) {
+        val hospitalsRef = db.collection("HOSPITAL").document("Bhopal")
+        val skincareRef = db.collection("SkincareProducts").document("Products")
+
+        val resultsList = mutableListOf<String>()
+
+        hospitalsRef.get().addOnSuccessListener { document ->
+            val hospitals = document.get("hospitals") as? List<Map<String, String>>
+            hospitals?.forEach { hospital ->
+                val name = hospital["name"] ?: ""
+                if (name.contains(query, ignoreCase = true)) {
+                    resultsList.add("Hospital: $name")
+                }
+            }
+            updateSearchResults(resultsList)
+        }
+
+        skincareRef.get().addOnSuccessListener { document ->
+            val products = document.get("products") as? List<Map<String, String>>
+            products?.forEach { product ->
+                val name = product["name"] ?: ""
+                if (name.contains(query, ignoreCase = true)) {
+                    resultsList.add("Product: $name")
+                }
+            }
+            updateSearchResults(resultsList)
+        }
+    }
+
+    private fun updateSearchResults(results: List<String>) {
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, results)
+        findViewById<ListView>(R.id.search_results).adapter = adapter
     }
 
     private fun openImageChooser() {
@@ -307,7 +363,7 @@ class Home : AppCompatActivity() {
         docName3: TextView, contact3: TextView,
         docName4: TextView, contact4: TextView
     ) {
-        val docRef = db.collection("Atopic Dermatitis").document("Bangalore")
+        val docRef = db.collection("Atopic Dermatitis").document("Bhopal")
 
         docRef.get()
             .addOnSuccessListener { document ->
@@ -359,7 +415,7 @@ class Home : AppCompatActivity() {
     }
 
     private fun fetchHospitalDetails() {
-        val hospitalRef = db.collection("HOSPITAL").document("Bangalore")
+        val hospitalRef = db.collection("HOSPITAL").document("Bhopal")
 
         hospitalRef.get()
             .addOnSuccessListener { document ->
