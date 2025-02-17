@@ -25,15 +25,17 @@ import com.hfad.skindoc.userprofile.UserProfileActivity
 import kotlin.jvm.java
 import android.content.ContentResolver
 import android.provider.OpenableColumns
+import com.hfad.skindoc.ml.ApiResponse
 import java.io.File
 import com.hfad.skindoc.ml.MyApi
-import com.hfad.skindoc.ml.UploadRequestBody
 import com.hfad.skindoc.ml.UploadResponse
+import com.hfad.skindoc.ml.ml
 
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -172,11 +174,6 @@ class Home : AppCompatActivity() {
     }
 
 
-
-
-
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
@@ -191,32 +188,35 @@ class Home : AppCompatActivity() {
 
 
     private fun uploadImage(imageUri: Uri) {
-        // Convert the image URI to a file
+
         val contentResolver = contentResolver
         val parcelFileDescriptor = contentResolver.openFileDescriptor(imageUri, "r", null) ?: return
         val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
         val file = File(cacheDir, getFileName(imageUri))
         val outputStream = FileOutputStream(file)
 
-        // Copy the contents from InputStream to OutputStream
+
         inputStream.copyTo(outputStream)
 
-        // Create a request body for the image to upload
+
         val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
 
-        // Create description text for the image
+
         val description = "Sample Image".toRequestBody("text/plain".toMediaTypeOrNull())
 
 
-        // API call to upload the image
-        val apiService = MyApi.create()
-        val call: Call<UploadResponse> = apiService.uploadImage(body, description)
 
-        // Make the API call asynchronously
-        call.enqueue(object : Callback<UploadResponse> {
-            override fun onResponse(call: Call<UploadResponse>, response: Response<UploadResponse>) {
+        val apiService = MyApi.create()
+        val call: Call<ApiResponse> = apiService.uploadImage(body, description)
+
+
+        call.enqueue(object : Callback<ApiResponse> {
+            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                 if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    resultselection(responseBody)
+                    Log.d("Upload", "Response Body: $responseBody")
                     Log.d("Upload", "Image uploaded successfully!")
                     Toast.makeText(this@Home, "Image uploaded successfully!", Toast.LENGTH_SHORT).show()
                 } else {
@@ -226,14 +226,38 @@ class Home : AppCompatActivity() {
                 }
             }
 
+            private fun resultselection(response: ApiResponse?) {
+                val maxPrediction = response?.prediction?.maxByOrNull { it.probability }
 
-            override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
+                maxPrediction?.let {
+                    val diseaseName = it.className
+                    val predictionScore = it.probability
+
+                    Log.d("Prediction", "Class with highest probability: ${it.className}, Probability: ${it.probability}")
+
+                    val intent = Intent(this@Home, ml::class.java)
+                    intent.putExtra("disease_name", diseaseName)
+                    intent.putExtra("prediction_score", predictionScore.toString())
+                    intent.putExtra("disease_image", imageUri.toString())
+                    startActivity(intent)
+                }
+            }
+
+
+
+
+
+
+
+            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                 Log.e("Upload", "Error uploading image: ${t.message}")
-                t.printStackTrace()  // Print stack trace for better debugging
+                t.printStackTrace()
                 Toast.makeText(this@Home, "Upload failed: ${t.message}", Toast.LENGTH_SHORT).show()
             }
 
         })
+
+
     }
 
 

@@ -18,7 +18,7 @@ interface MyApi {
     fun uploadImage(
         @Part image: MultipartBody.Part,
         @Part("desc") desc: RequestBody
-    ): Call<UploadResponse>
+    ): Call<ApiResponse>
 
     companion object {
         fun create(): MyApi {
